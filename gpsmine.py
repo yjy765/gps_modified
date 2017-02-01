@@ -157,12 +157,12 @@ if __name__ == '__main__':
 
 	eps = 1e-100
         policy_var = 1e-2
-	ddp_sample = 150  #number of total sample
 	sample_num_max = 200
 	N_sample_init = 10 #number of sample from each ddp solution
 	N_ddp_sol = 19  #number of ddp solution
+	ddp_sample = N_sample_init * N_ddp_sol  #number of total sample
 	N_sol = 20
-        K_iter = 30
+        K_iter = 50
         w_reg = 1e-4
         cost_prev = -1
         policy_num = 0
@@ -496,7 +496,7 @@ if __name__ == '__main__':
 		loss_new1 = tf.reduce_sum( tf.div(r_t,z_t+eps) + w_reg*tf.log(z_t+eps))
 		
 		#train_new1 = optimizer(loss_new1,sess)	
-		train_new1 = tf.train.GradientDescentOptimizer(0.00001).minimize(loss_new1)
+		train_new1 = tf.train.GradientDescentOptimizer(0.0001).minimize(loss_new1)
                 #execute Optimization
 
 		#method 1
